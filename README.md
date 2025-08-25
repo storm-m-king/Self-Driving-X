@@ -5,7 +5,8 @@ This repository provides a reproducible, Docker-based setup for the AgileX LIMO 
 ```
 limo_lab_workspace/
 ├── Dockerfile                   # Builds the complete ROS 2 Humble simulation environment
-├── setup.sh                     # Cross-platform script to build and run the Docker container
+├── start.bat                    # Windows script to build and run the Docker container
+├── start.sh                     # Mac/Linux script to build and run the Docker container
 ├── patches/                     # Contains patched files for simulation fixes
 │   ├── ackermann_with_sensor.xacro
 │   ├── empty_world.sdf
@@ -25,22 +26,28 @@ limo_lab_workspace/
 
 1. Clone this repository:
 ```
-git clone https://github.com/storm-m-king/limo_lab_workspace.git
-cd limo_lab_workspace
+git clone https://github.com/storm-m-king/Self-Driving-X.git
+cd Self-Driving-X
 ```
 
 
 2. Run the setup script:
-```./setup.sh```
 
+On Linux / Mac *(NOT YET TESTED)*
+```
+./start.sh
+```
+On Windows
+```
+./start.bat
+```
 
-- The script auto-detects your OS and configures Docker for GUI support.
+- The script detects your OS and configures Docker for GUI support.
 - On Windows, start VcXsrv before running the script.
 - On Mac, start XQuartz and enable “Allow connections from network clients.”
 3. Inside the container, launch the simulation:
 ```
-source /opt/ros/humble/setup.bash
-cd /home/limo_ws
+colcon build
 source install/setup.bash
 ros2 launch limo_car ackermann_gazebo.launch.py
 ```
@@ -48,6 +55,7 @@ ros2 launch limo_car ackermann_gazebo.launch.py
 
 - This will open Gazebo and RViz with the LIMO robot.
 4. Start the robot steering GUI:
+  - In another terminal, run the start script again. Then run:
 ```
 ros2 run rqt_robot_steering rqt_robot_steering
 ```
@@ -93,4 +101,5 @@ This setup is based on the AgileX LIMO Environment Setup Lab, which guides users
 All steps are automated and reproducible, making it ideal for classroom use and self-guided learning.
 
 For questions or issues, please open an issue in this repository. Happy simulating!
+
 
