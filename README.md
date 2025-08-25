@@ -3,7 +3,7 @@ This repository provides a reproducible, Docker-based setup for the AgileX LIMO 
 
 ## Directory Structure
 ```
-limo_lab_workspace/
+Self-Driving-X/
 ├── Dockerfile                   # Builds the complete ROS 2 Humble simulation environment
 ├── start.bat                    # Windows script to build and run the Docker container
 ├── start.sh                     # Mac/Linux script to build and run the Docker container
@@ -105,6 +105,7 @@ This setup is based on the AgileX LIMO Environment Setup Lab, which guides users
 All steps are automated and reproducible, making it ideal for classroom use and self-guided learning.
 
 For questions or issues, please open an issue in this repository. Happy simulating!
+
 
 
 
