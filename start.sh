@@ -9,8 +9,8 @@ if [ "$(docker ps -a -q -f name=^/${CONTAINER}$)" ]; then
     echo "If you want to remove it and start fresh, run:"
     echo "    docker rm -f $CONTAINER"
     echo "Connecting to the existing container..."
-    docker exec -it %CONTAINER% /bin/bash
-    exit 1
+    docker exec -it $CONTAINER /bin/bash
+    return 0
 fi
 
 # Build the Docker image from the local Dockerfile
