@@ -20,12 +20,37 @@ docker build -t $IMAGE .
 # Detect OS and set Docker run options
 OS=$(uname -s)
 
-if [[ "$OS" == "Linux" ]]; then
-    # For native Linux with X11
+if grep -qEi "(Microsoft|WSL)" /proc/version &> /dev/null ; then
+    # For Windows 11 with WSLg
+    echo -e "\033[32mDetected Windows/WSLg. Make sure VcXsrv is running.\033[0m"
+    
+    # Check for NVIDIA GPU
+    if nvidia-smi > /dev/null 2>&1; then
+        echo -e "\033[32mNVIDIA GPU detected. Running Docker with GPU support.\033[0m"
+        docker run -it --gpus all --name $CONTAINER --privileged \
+            -e DISPLAY=$DISPLAY \
+            -e QT_X11_NO_MITSHM=1 \
+            -v /run/desktop/mnt/host/wslg/.X11-unix:/tmp/.X11-unix \
+            -v /run/desktop/mnt/host/wslg:/mnt/wslg \
+            $IMAGE
+    else
+        echo -e "\033[33mNo NVIDIA GPU detected or NVIDIA drivers/toolkit not installed. Running without GPU support.\033[0m"
+        docker run -it --name $CONTAINER --privileged \
+            -e DISPLAY=$DISPLAY \
+            -e QT_X11_NO_MITSHM=1 \
+            -v /run/desktop/mnt/host/wslg/.X11-unix:/tmp/.X11-unix \
+            -v /run/desktop/mnt/host/wslg:/mnt/wslg \
+            $IMAGE
+    fi
+
+
+elif [[ "$OS" == "Linux" ]]; then
+    
+    # Native Linux
     DISPLAY_VAR=${DISPLAY:-:0}
     XSOCK="/tmp/.X11-unix"
-    echo "Detected Linux. Make sure X11 is running."
-    docker run -it --name $CONTAINER --privileged \
+    echo -e "\033[32mDetected Linux. Make sure X11 is running.\033[0m"
+    docker run -it --gpus all --name $CONTAINER --privileged \
         -e DISPLAY=$DISPLAY_VAR \
         -e QT_X11_NO_MITSHM=1 \
         -v $XSOCK:$XSOCK \
@@ -33,7 +58,8 @@ if [[ "$OS" == "Linux" ]]; then
 
 elif [[ "$OS" == "Darwin" ]]; then
     # For MacOS with XQuartz
-    echo "Detected MacOS. Make sure XQuartz is running and 'Allow connections from network clients' is enabled."
+    echo -e "\033[32mDetected MacOS. Make sure XQuartz is running and 'Allow connections from network clients' is enabled.\033[0m"
+
     IP=$(ifconfig en0 | grep inet | awk '$1=="inet" {print $2}')
     DISPLAY_VAR="${IP}:0"
     XSOCK="/tmp/.X11-unix"
@@ -43,16 +69,7 @@ elif [[ "$OS" == "Darwin" ]]; then
         -v $XSOCK:$XSOCK \
         $IMAGE
 
-elif grep -qEi "(Microsoft|WSL)" /proc/version &> /dev/null ; then
-    # For Windows 11 with WSLg
-    echo "Detected Windows/WSLg. Make sure VcXsrv is running."
-    docker run -it --name $CONTAINER --privileged \
-        -e DISPLAY=host.docker.internal:0.0 \
-        -e QT_X11_NO_MITSHM=1 \
-        -v /run/desktop/mnt/host/wslg/.X11-unix:/tmp/.X11-unix \
-        -v /run/desktop/mnt/host/wslg:/mnt/wslg \
-        $IMAGE
 else
-    echo "Unknown OS. Please start the container manually with appropriate DISPLAY and volume settings."
+    echo -e "\033[31m[ERROR]: Unknown OS. Cannot run docker.\033[0m"
     exit 1
 fi
