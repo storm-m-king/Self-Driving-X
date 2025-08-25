@@ -34,17 +34,27 @@ call :WriteLine "Building the docker image '%IMAGE%' with name '%CONTAINER%'" "G
 REM Build the Docker image from the local Dockerfile
 docker build -t %IMAGE% .
 
-REM Detect GPU presence
-set GPU_PRESENT=false
-for /f "skip=1 tokens=*" %%G in ('wmic path win32_VideoController get name') do (
-    if not "%%G"=="" (
-        set GPU_PRESENT=true
-    )
+
+REM Query GPU info using PowerShell
+for /f "delims=" %%G in ('powershell -Command "Get-WmiObject Win32_VideoController | Select-Object -ExpandProperty Name"') do (
+    set GPU_NAME=%%G
 )
+
+
+REM Check if GPU is NVIDIA
+set GPU_PRESENT=false
+echo %GPU_NAME% | findstr /i "NVIDIA" >nul
+if %errorlevel%==0 (
+    call :WriteLine "Nvidia GPU '%GPU_NAME%' detected! Running Docker with GPU support..." "Yellow" 
+    set GPU_PRESENT=true
+) else (
+    call :WriteLine "No GPU detected. Running Docker without GPU support..." "Yellow"
+)
+
+call :WriteLine "Please ensure that you have started VcXsrv (XLaunch)" "Yellow"
 
 REM Run the container with GUI support for Windows/WSLg
 if "%GPU_PRESENT%"=="true" (
-    call :WriteLine "GPU detected! Running Docker with GPU support..." "Green"
     docker run -it --gpus all --name %CONTAINER% --privileged ^
         -e DISPLAY=host.docker.internal:0.0 ^
         -e QT_X11_NO_MITSHM=1 ^
@@ -52,8 +62,6 @@ if "%GPU_PRESENT%"=="true" (
         -v /run/desktop/mnt/host/wslg:/mnt/wslg ^
         %IMAGE%
 ) else (
-    call :WriteLine "No GPU detected. Running Docker without GPU support..." "Yellow"
-    call :WriteLine "Please ensure that you have started VcXsrv (XLaunch)" "Yellow"
     docker run -it --name %CONTAINER% --privileged ^
         -e DISPLAY=host.docker.internal:0.0 ^
         -e QT_X11_NO_MITSHM=1 ^
@@ -61,17 +69,6 @@ if "%GPU_PRESENT%"=="true" (
         -v /run/desktop/mnt/host/wslg:/mnt/wslg ^
         %IMAGE%
 )
-
-
-REM Run the container with GUI support for Windows/WSLg
-docker run -it --name %CONTAINER% --privileged ^
-    -e DISPLAY=host.docker.internal:0.0 ^
-    -e QT_X11_NO_MITSHM=1 ^
-    -v /run/desktop/mnt/host/wslg/.X11-unix:/tmp/.X11-unix ^
-    -v /run/desktop/mnt/host/wslg:/mnt/wslg ^
-    %IMAGE%
-endlocal
-
 
 :: sub-routines
 

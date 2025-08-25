@@ -3,19 +3,18 @@
 IMAGE="osrf/ros:humble-desktop-full"
 CONTAINER="limo_dev"
 
-# Build the Docker image from the local Dockerfile
-docker build -t $IMAGE .
-
 # Check if a container with the same name already exists
 if [ "$(docker ps -a -q -f name=^/${CONTAINER}$)" ]; then
     echo "WARNING: A container named '$CONTAINER' already exists."
-    echo "To connect to the existing container, run:"
-    echo "    docker start $CONTAINER"
-    echo "    docker exec -it $CONTAINER /bin/bash"
     echo "If you want to remove it and start fresh, run:"
     echo "    docker rm -f $CONTAINER"
+    echo "Connecting to the existing container..."
+    docker exec -it %CONTAINER% /bin/bash
     exit 1
 fi
+
+# Build the Docker image from the local Dockerfile
+docker build -t $IMAGE .
 
 # Detect OS and set Docker run options
 OS=$(uname -s)
@@ -27,7 +26,7 @@ if [[ "$OS" == "Linux" ]]; then
     echo "Detected Linux. Make sure X11 is running."
     docker run -it --name $CONTAINER --privileged \
         -e DISPLAY=$DISPLAY_VAR \
-        -e QT_X11_NO_MITSHM=1 \      
+        -e QT_X11_NO_MITSHM=1 \
         -v $XSOCK:$XSOCK \
         $IMAGE
 
