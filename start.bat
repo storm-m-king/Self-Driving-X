@@ -29,9 +29,9 @@ if %errorlevel%==0 (
     exit /b 1
 )
 
-call :WriteLine "Building the docker image '%IMAGE%' with name '%CONTAINER%'" "Green"
 
 REM Build the Docker image from the local Dockerfile
+call :WriteLine "Building the docker image '%IMAGE%' with name '%CONTAINER%'" "Green"
 docker build -t %IMAGE% .
 
 

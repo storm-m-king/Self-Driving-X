@@ -5,15 +5,16 @@ CONTAINER="limo_dev"
 
 # Check if a container with the same name already exists
 if [ "$(docker ps -a -q -f name=^/${CONTAINER}$)" ]; then
-    echo "WARNING: A container named '$CONTAINER' already exists."
-    echo "If you want to remove it and start fresh, run:"
-    echo "    docker rm -f $CONTAINER"
-    echo "Connecting to the existing container..."
+    echo -e "\e[33mWARNING: A container named '$CONTAINER' already exists.\e[0m"
+    echo -e "\e[33mIf you want to remove it and start fresh, run:\e[0m"
+    echo -e "\e[33m    docker rm -f $CONTAINER\e[0m"
+    echo -e "\e[33mConnecting to existing container...\e[0m"
     docker exec -it $CONTAINER /bin/bash
     return 0
 fi
 
 # Build the Docker image from the local Dockerfile
+echo -e "\033[32mBuilding the docker image '$IMAGE' with name '$CONTAINER'\033[0m"
 docker build -t $IMAGE .
 
 # Detect OS and set Docker run options
@@ -47,7 +48,7 @@ elif grep -qEi "(Microsoft|WSL)" /proc/version &> /dev/null ; then
     echo "Detected Windows/WSLg. Make sure VcXsrv is running."
     docker run -it --name $CONTAINER --privileged \
         -e DISPLAY=host.docker.internal:0.0 \
-        -e QT_X11_NO_MITSHM=1 \        
+        -e QT_X11_NO_MITSHM=1 \
         -v /run/desktop/mnt/host/wslg/.X11-unix:/tmp/.X11-unix \
         -v /run/desktop/mnt/host/wslg:/mnt/wslg \
         $IMAGE
