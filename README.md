@@ -60,8 +60,12 @@ ros2 launch limo_car ackermann_gazebo.launch.py
 ros2 run rqt_robot_steering rqt_robot_steering
 ```
 
-
 - Use the GUI to control the robot in the simulation.
+
+[Optional] If you prefer to use the keyboard instead to move the robot, then run:
+```
+ros2 run teleop_twist_keyboard teleop_twist_keyboard
+```
 
 ## What’s Included?
 
@@ -101,5 +105,6 @@ This setup is based on the AgileX LIMO Environment Setup Lab, which guides users
 All steps are automated and reproducible, making it ideal for classroom use and self-guided learning.
 
 For questions or issues, please open an issue in this repository. Happy simulating!
+
 
 
