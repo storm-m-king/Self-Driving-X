@@ -35,7 +35,7 @@ cd Self-Driving-X
 
 On Linux / Mac *(NOT YET TESTED)*
 ```
-./start.sh
+. start.sh
 ```
 On Windows
 ```
@@ -105,6 +105,7 @@ This setup is based on the AgileX LIMO Environment Setup Lab, which guides users
 All steps are automated and reproducible, making it ideal for classroom use and self-guided learning.
 
 For questions or issues, please open an issue in this repository. Happy simulating!
+
 
 
 
