@@ -114,14 +114,14 @@ _(Full code provided in this repo.)_
 #### 1. Publisher Node `numbers_publisher.py`
 
 - Publishes random integers on topic numbers.
-- Frequency controlled by a parameter.
+- Frequency controlled by a parameter named frequency.
 - QoS settings Reliability, Durability, History, and Depth controlled by parameters.
 
 
 #### 2. Subscriber Node `filter_subscriber.py`
 
 - Subscribes to numbers.
-- Prints values above a threshold parameter.
+- Prints values above a threshold parameter named threshold.
 - QoS settings Reliability, Durability, History, and Depth controlled by parameters.
 
 #### Modify `setup.py` to include the following in `entry_points`:
@@ -240,6 +240,7 @@ ros2 run rqt_plot rqt_plot /numbers/data
 ros2 bag record /numbers
 ros2 bag play <bag_folder>
 ```
+
 
 
 
