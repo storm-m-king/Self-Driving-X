@@ -97,18 +97,19 @@ https://github.com/agilexrobotics/limo_ros2
 
 https://docs.ros.org/en/humble/index.html
 
-## About This Lab
-This setup is based on the AgileX LIMO Environment Setup Lab, which guides users through:
+## About This Setup
+This setup is based on the AgileX LIMO Environment Setup, which guides users through:
 
 - Setting up Docker for ROS 2 Humble
 - Installing required packages and dependencies
 - Creating and building the LIMO workspace
 - Fixing simulation errors with patched files
-- Launching and visualizing the robot in Gazebo and RViz
+- Launching and visualizing the AgileX LIMO robot in Gazebo and RViz
 - Interacting with the robot using the steering GUI
 All steps are automated and reproducible, making it ideal for classroom use and self-guided learning.
 
 For questions or issues, please open an issue in this repository. Happy simulating!
+
 
 
 
