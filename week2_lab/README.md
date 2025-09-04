@@ -19,11 +19,6 @@ This lab introduces core ROS 2 communication concepts through hands-on Python ex
 
 ## Background Info
 
-### Nodes
-
-- **numbers_publisher.py**: Publishes random integers on the `numbers` topic. Frequency is controlled by a parameter.
-- **filter_subscriber.py**: Subscribes to the `numbers` topic and prints values above a threshold parameter.
-
 ### Key ROS 2 Concepts
 
 - **Nodes**: Independent processes performing specific tasks.
@@ -98,7 +93,7 @@ This lab introduces core ROS 2 communication concepts through hands-on Python ex
 
 
 
-## Lab 2
+## Lab 2 Instructions
 
 ### 1. **Workspace Setup:**
 - Create a ROS2 package named `week2_lab`:
@@ -241,5 +236,6 @@ ros2 run rqt_plot rqt_plot /numbers/data
 ros2 bag record /numbers
 ros2 bag play <bag_folder>
 ```
+
 
 
