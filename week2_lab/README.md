@@ -51,7 +51,7 @@ This lab introduces core ROS 2 communication concepts through hands-on Python ex
 
 ### QoS (Quality of Service) in ROS 2
 - QoS defines **how messages are delivered** between publishers and subscribers. It ensures reliability, performance, and flexibility in different network conditions.
-
+  
 #### Key QoS Policies and Their Values:
 1. **Reliability**
 
@@ -90,6 +90,8 @@ This lab introduces core ROS 2 communication concepts through hands-on Python ex
 - Ensures compatibility between publishers and subscribers.
 - Helps in real-time systems where message loss or delay is critical.
 - Use `ros2 topic info <topic name> --verbose` to check QoS settings.
+
+***See [Quality of Service settings](https://docs.ros.org/en/rolling/Concepts/Intermediate/About-Quality-of-Service-Settings.html) for more info.***
 
 
 
@@ -236,6 +238,7 @@ ros2 run rqt_plot rqt_plot /numbers/data
 ros2 bag record /numbers
 ros2 bag play <bag_folder>
 ```
+
 
 
 
