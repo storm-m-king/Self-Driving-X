@@ -109,18 +109,20 @@ This lab introduces core ROS 2 communication concepts through hands-on Python ex
 
 Add the following nodes in the week2_lab/week2_lab/ folder
 
-_(Full code provided in starter files in this repo.)_
+_(Full code provided in this repo.)_
 
 #### 1. Publisher Node `numbers_publisher.py`
 
 - Publishes random integers on topic numbers.
 - Frequency controlled by a parameter.
+- QoS settings Reliability, Durability, History, and Depth controlled by parameters.
 
 
 #### 2. Subscriber Node `filter_subscriber.py`
 
 - Subscribes to numbers.
 - Prints values above a threshold parameter.
+- QoS settings Reliability, Durability, History, and Depth controlled by parameters.
 
 #### Modify `setup.py` to include the following in `entry_points`:
 ```python
@@ -238,6 +240,7 @@ ros2 run rqt_plot rqt_plot /numbers/data
 ros2 bag record /numbers
 ros2 bag play <bag_folder>
 ```
+
 
 
 
