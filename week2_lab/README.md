@@ -41,11 +41,11 @@ This lab introduces core ROS 2 communication concepts through hands-on Python ex
 - **Remapping**: Allows you to change topic or node names at runtime.
   - Syntax:
     ```
-    ros2 run <package> <executable> --ros-args -r <old_name>:=<new_name>
+    ros2 run <package> <executable> --ros-args --remap <old_name>:=<new_name>
     ```
   - Example:  
     ```
-    ros2 run week2_lab numbers_publisher --ros-args -r numbers:=/sensors/numbers
+    ros2 run week2_lab numbers_publisher --ros-args --remap numbers:=/sensors/numbers
     ```
 
 
@@ -183,7 +183,7 @@ ros2 topic hz /numbers
 #### ***B. Topic Remapping***
 - Remap the topic to give it a different name:
 ```bash
-ros2 run week2_lab numbers_publisher --ros-args -r numbers:=/sensors/numbers
+ros2 run week2_lab numbers_publisher --ros-args --remap numbers:=/sensors/numbers
 ```
 - Update subscriber similarly and observe the changes via `rqt_graph`
 
@@ -227,7 +227,7 @@ ros2 doctor --report
 ## Additional Practice 
 - Start the publisher and subscriber. Add a second subscriber node with a different threshold and name. Observe both subscribers in `rqt_graph`.
 ```bash
-ros2 run week2_lab filter_subscriber --ros_args –r __node:=filter_subscriber2 –p threshold:=50 
+ros2 run week2_lab filter_subscriber --ros-args --remap __node:=filter_subscriber2 -p threshold:=50
 ```
 
 - Use rqt_plot to visualize numeric data:
@@ -240,6 +240,7 @@ ros2 run rqt_plot rqt_plot /numbers/data
 ros2 bag record /numbers
 ros2 bag play <bag_folder>
 ```
+
 
 
 
