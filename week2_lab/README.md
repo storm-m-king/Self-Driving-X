@@ -202,12 +202,12 @@ def _cb(self, msg: Float32):
 
 - Publisher: `best_effort`:
 ```bash
-ros2 run week2_lab numbers_publisher --ros-args -r qos.reliability:=best_effort
+ros2 run week2_lab numbers_publisher --ros-args -p qos.reliability:=best_effort
 ```
 
 - Subscriber: `reliable`:
 ```bash
-ros2 run week2_lab filter_subscriber --ros-args -r qos.reliability:=reliable   
+ros2 run week2_lab filter_subscriber --ros-args -p qos.reliability:=reliable   
 ```
 
 - Check QOS compatibility with the following commands:
@@ -238,6 +238,7 @@ ros2 run rqt_plot rqt_plot /numbers/data
 ros2 bag record /numbers
 ros2 bag play <bag_folder>
 ```
+
 
 
 
