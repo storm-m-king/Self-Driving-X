@@ -11,7 +11,7 @@ Self-Driving-X/
 │   ├── ackermann_with_sensor.xacro
 │   ├── empty_world.sdf
 │   └── ackermann_gazebo.launch.py
-├── week2_lab/                   # Source code for Week 2 lab
+├── week2_lab/                   # Source code for Week 2 lab: ROS 2 Nodes, Topics & Messages
 │   ├── setup.py                 
 │   ├── numbers_publisher.py    
 │   └── filter_subscriber.py     
@@ -109,6 +109,7 @@ This setup is based on the AgileX LIMO Environment Setup, which guides users thr
 All steps are automated and reproducible, making it ideal for classroom use and self-guided learning.
 
 For questions or issues, please open an issue in this repository. Happy simulating!
+
 
 
 
