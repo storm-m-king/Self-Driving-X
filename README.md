@@ -24,7 +24,7 @@ Self-Driving-X/
 ### Prerequisites
 
 - Docker installed (https://docs.docker.com/get-docker/)
-- VcXsrv for GUI support (https://sourceforge.net/projects/vcxsrv/files/vcxsrv/)
+- VcXsrv (Windows only) for GUI support (https://sourceforge.net/projects/vcxsrv/files/vcxsrv/)
 - XQuartz (Mac only) for GUI support (https://www.xquartz.org/)
 
 ## Setup Steps
@@ -110,6 +110,7 @@ This setup is based on the AgileX LIMO Environment Setup, which guides users thr
 All steps are automated and reproducible, making it ideal for classroom use and self-guided learning.
 
 For questions or issues, please open an issue in this repository. Happy simulating!
+
 
 
 
