@@ -225,7 +225,7 @@ ros2 doctor --report
 4. Reflection: Which factor (frequency, topic name, type, QoS) surprised you most?
 
 ## Additional Practice 
-- Add a second subscriber node with a different threshold and name. Observe both subscribers in rqt_graph.
+- Start the publisher and subscriber. Add a second subscriber node with a different threshold and name. Observe both subscribers in `rqt_graph`.
 ```bash
 ros2 run week2_lab filter_subscriber --ros_args –r __node:=filter_subscriber2 –p threshold:=50 
 ```
@@ -240,6 +240,7 @@ ros2 run rqt_plot rqt_plot /numbers/data
 ros2 bag record /numbers
 ros2 bag play <bag_folder>
 ```
+
 
 
 
