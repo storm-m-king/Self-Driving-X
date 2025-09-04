@@ -151,7 +151,7 @@ limo_ws/
 ### 3. **Build and Source**
 ```bash
 cd ~/limo_ws
-colcon build --symlink-install
+colcon build
 source install/setup.bash
 ```
 
@@ -222,8 +222,8 @@ ros2 doctor --report
 3. Explanation of a QoS incompatibility and how you diagnosed it.
 4. Reflection: Which factor (frequency, topic name, type, QoS) surprised you most?
 
-## Stretch Goals
-- Add a second subscriber with a different threshold and name. Observe both subscribers in rqt_graph.
+## Additional Practice 
+- Add a second subscriber node with a different threshold and name. Observe both subscribers in rqt_graph.
 ```bash
 ros2 run week2_lab filter_subscriber --ros_args –r __node:=filter_subscriber2 –p threshold:=50 
 ```
@@ -238,6 +238,7 @@ ros2 run rqt_plot rqt_plot /numbers/data
 ros2 bag record /numbers
 ros2 bag play <bag_folder>
 ```
+
 
 
 
