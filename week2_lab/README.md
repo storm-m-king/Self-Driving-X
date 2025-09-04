@@ -138,17 +138,17 @@ entry_points={
 #### Directory Scaffold to aim for by end of setup:
 ```
 limo_ws/
-  src/
-    week2_lab/
-      package.xml
-      resource/
-      setup.cfg
-      setup.py
-      test/
-      week2_lab/
-        __init__.py
-        numbers_publisher.py
-        filter_subscriber.py
+└── src/
+    └── week2_lab/
+        ├── package.xml
+        ├── resource/
+        ├── setup.cfg 
+        ├── setup.py                   # Python package build script
+        ├── test/              
+        └── week2_lab/                 # Python module directory
+            ├── __init__.py 
+            ├── numbers_publisher.py   # Publisher node script
+            └── filter_subscriber.py   # Subscriber node script
 ```
 
 ### 3. **Build and Source**
@@ -241,4 +241,5 @@ ros2 run rqt_plot rqt_plot /numbers/data
 ros2 bag record /numbers
 ros2 bag play <bag_folder>
 ```
+
 
