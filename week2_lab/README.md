@@ -241,6 +241,7 @@ ros2 bag record /numbers
 ros2 bag play <bag_folder>
 ```
 
+### Done? Check your work: [Lab2 Deliverables](../documents/Lab2-Deliverables.pdf)
 
 
 
