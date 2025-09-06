@@ -15,7 +15,7 @@ This lab introduces core ROS 2 communication concepts through hands-on Python ex
 
 - ROS 2 Humble installed (or Docker environment ready)
 - Basic Linux command-line knowledge
-- Completed Week 1 introduction to ROS 2
+- Review [Intro ROS2 Communication](../documents/Intro-ROS2-Communication.pdf)
 
 ## Background Info
 
@@ -240,6 +240,7 @@ ros2 run rqt_plot rqt_plot /numbers/data
 ros2 bag record /numbers
 ros2 bag play <bag_folder>
 ```
+
 
 
 
