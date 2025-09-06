@@ -227,7 +227,7 @@ ros2 doctor --report
 ## Additional Practice 
 - Start the publisher and subscriber. Add a second subscriber node with a different threshold and name. Observe both subscribers in `rqt_graph`.
 ```bash
-ros2 run week2_lab filter_subscriber --ros-args --remap __node:=filter_subscriber2 -p threshold:=50
+ros2 run week2_lab filter_subscriber --ros-args –-remap __node:=filter_subscriber2 –p threshold:=70 
 ```
 
 - Use rqt_plot to visualize numeric data:
@@ -240,6 +240,7 @@ ros2 run rqt_plot rqt_plot /numbers/data
 ros2 bag record /numbers
 ros2 bag play <bag_folder>
 ```
+
 
 
 
